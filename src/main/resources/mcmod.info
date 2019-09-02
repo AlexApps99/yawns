@@ -1,14 +1,12 @@
 [{
-  "modid": "yawns",
-  "name": "Y.A.W.N.S",
-  "description": "Yet another wildly nauseating scam\nA free, open source hacked client with a focus on customization and automation.",
+  "modid": "yawnsmod",
+  "name": "YAWNS Mod",
+  "description": "A free, open source hacked client with a focus on modularity, customization and automation.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "yawnsmod.github.io",
   "updateJSON": "",
   "authorList": ["AlexApps99"],
-  "credits": "ForgeHax for being there for me",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+  "credits": "Thanks to ForgeHax for being there for me",
+  "logoFile": ""
 }]
