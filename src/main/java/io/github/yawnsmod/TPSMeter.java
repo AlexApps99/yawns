@@ -23,12 +23,12 @@ public class TPSMeter extends Gui
     	
     	long time = mc.world.getWorldTime();
     	LocalTime timeMins = LocalTime.MIN.plus(Duration.ofMinutes((long) ((double) (time + 6000)/(24000.0/1440))));
-    	drawString(mc.fontRenderer, String.format("%d (%2$tI:%2$tM %2$Tp)", time, timeMins), 0, height/2, Integer.parseInt("FFAA00", 16));
+    	drawString(mc.fontRenderer, String.format("%d (%2$tI:%2$tM %2$Tp)", time, timeMins), 0, mc.fontRenderer.FONT_HEIGHT, Integer.parseInt("FFAA00", 16));
     	
     	RayTraceResult lookedatblock = mc.player.rayTrace(200, 1.0F);
     	if (lookedatblock != null && lookedatblock.typeOfHit == RayTraceResult.Type.BLOCK)
     	{
-    		drawString(mc.fontRenderer, mc.world.getBlockState(lookedatblock.getBlockPos()).getBlock().getLocalizedName(), 0, height/4, Integer.parseInt("FFAA00", 16));
+    		drawString(mc.fontRenderer, mc.world.getBlockState(lookedatblock.getBlockPos()).getBlock().getLocalizedName(), 0, height - mc.fontRenderer.FONT_HEIGHT, Integer.parseInt("FFAA00", 16));
     	}
     }
 }
