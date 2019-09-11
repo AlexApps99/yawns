@@ -13,7 +13,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Gradle
-      run: |
-        ./gradlew setupDecompWorkspace
-        ./gradlew build
+    - name: Setup Decompilation Workspace
+      run: ./gradlew setupDecompWorkspace
+    - name: Build
+      run: ./gradlew build
+    - uses: actions/upload-artifact@master
+      with:
+        name: 1.12.2 JAR file
+        path: build/libs/yawnsmod-0.1.jar
