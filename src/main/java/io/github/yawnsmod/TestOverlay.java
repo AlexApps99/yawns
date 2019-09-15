@@ -10,7 +10,7 @@ public class TestOverlay
 	@SubscribeEvent
 	public void onRenderGui(RenderGameOverlayEvent.Post event)
 	{
-		if (event.getType() != ElementType.EXPERIENCE) return;
-		new TPSMeter(Minecraft.getMinecraft());
+		if (event.getType() != ElementType.ALL) return; //EXPERIENCE
+		new TPSMeter(Minecraft.getMinecraft(), event);
 	}
 }
