@@ -14,12 +14,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8 # When setup-java gets updated remember to compile with OpenJDK too, as a matrix test
-    - name: Setup Decompilation Workspace
-      run: ./gradlew setupDecompWorkspace
+    - name: Setup Workspace
+      run: ./gradlew setupCIWorkspace
     - name: Build
       run: ./gradlew build
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: Mod JAR files
+        name: YAWNS-Mod-JARs
         path: build/libs/
