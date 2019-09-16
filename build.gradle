@@ -2,7 +2,7 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url 'https://jitpack.io' }
+        maven { url = "https://jitpack.io" }
         mavenCentral()
     }
     dependencies {
@@ -39,6 +39,11 @@ jar {
             "Main-Class": "io.github.yawnsmod.Installer"
         ])
     }
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
 }
 
 processResources {
@@ -70,4 +75,9 @@ dependencies {
 	["gl", "glfw", "core"].each {
 		shade "com.github.kotlin-graphics.imgui:imgui-$it:master-SNAPSHOT"
 	}
+}
+
+minecraft {
+    srgExtra "PK: org/ejml your/new/package/here/ejml"
+    srgExtra "PK: org/ejml/alg your/new/package/here/ejml/alg"
 }
