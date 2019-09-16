@@ -2,11 +2,6 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
-        // https://github.com/jitpack/jitpack.io/issues/227#issuecomment-147193448
-        maven {
-          name = "jitpack"
-          url = "https://jitpack.io"
-        }
         mavenCentral()
     }
     dependencies {
@@ -14,6 +9,10 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+
+repositories {
+	maven { url = "https://jitpack.io" }
+}
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
