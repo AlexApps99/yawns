@@ -2,7 +2,11 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
-        maven { url = "https://jitpack.io" }
+        // https://github.com/jitpack/jitpack.io/issues/227#issuecomment-147193448
+        maven {
+          name = "jitpack"
+          url = "https://jitpack.io"
+        }
         mavenCentral()
     }
     dependencies {
