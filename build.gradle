@@ -21,14 +21,17 @@ group = "io.github.yawnsmod"
 archivesBaseName = "yawnsmod"
 
 // https://forgegradle.readthedocs.io/en/latest/user-guide/shading/
-configurations {
-    shade
-    compile.extendsFrom shade
-}
+//configurations {
+//    shade
+//    compile.extendsFrom shade
+//}
 
 dependencies {
 	["gl", "glfw", "core"].each {
-		shade("com.github.kotlin-graphics.imgui:imgui-$it:v1.71") {
+		//shade("com.github.kotlin-graphics.imgui:imgui-$it:master-SNAPSHOT") {
+		//	exclude group: "org.lwjgl"
+		//}
+		compile("com.github.kotlin-graphics.imgui:imgui-$it:master-SNAPSHOT") {
 			exclude group: "org.lwjgl"
 		}
 	}
@@ -47,11 +50,11 @@ jar {
             "Main-Class": "io.github.yawnsmod.Installer"
         ])
     }
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)){
-            exclude 'META-INF', 'META-INF/**'
-        }
-    }
+    //configurations.shade.each { dep ->
+    //    from(project.zipTree(dep)){
+    //        exclude 'META-INF', 'META-INF/**'
+    //    }
+    //}
 }
 
 minecraft {
@@ -62,7 +65,7 @@ minecraft {
     mappings = "stable_39"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
-    srgExtra "PK: imgui io/github/yawnsmod/imgui"
+    // srgExtra "PK: imgui io/github/yawnsmod/imgui" // I spent quite a while trying to shade this lib, to no avail
 }
 
 processResources {
