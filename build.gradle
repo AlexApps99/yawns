@@ -29,7 +29,7 @@ configurations {
 
 dependencies {
 	["gl", "glfw", "core"].each {
-		shade("com.github.kotlin-graphics.imgui:imgui-$it:master-SNAPSHOT") {
+		shade("com.github.kotlin-graphics.imgui:imgui-$it:v1.71") {
 			exclude group: "org.lwjgl"
 		}
 	}
