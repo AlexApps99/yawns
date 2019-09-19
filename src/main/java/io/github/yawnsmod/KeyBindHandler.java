@@ -1,7 +1,7 @@
 package io.github.yawnsmod;
 
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class KeyBindHandler
 {
@@ -10,7 +10,7 @@ public class KeyBindHandler
 	{
 		if (YawnsMod.yawnsgui.isPressed())
         {
-            YawnsMod.logger.info("Heyy");
+            YawnsMod.LOGGER.info("Heyy");
         }
 	}
 }

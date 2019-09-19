@@ -1,7 +1,7 @@
 package io.github.yawnsmod;
 
 import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ChatModifier
 {

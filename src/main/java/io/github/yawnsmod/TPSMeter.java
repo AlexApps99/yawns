@@ -5,21 +5,21 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceFluidMode;
 
 public class TPSMeter extends Gui
 {
     public TPSMeter(Minecraft mc, RenderGameOverlayEvent.Post event)
     {
-        ScaledResolution res = event.getResolution();
-        int width = res.getScaledWidth();
-        int height = res.getScaledHeight();
+        int width = mc.mainWindow.getScaledWidth();
+        int height = mc.mainWindow.getScaledHeight();
     	
         /* Top-left text */                                                        /* Top-right text */
     	ArrayList<String> tl = new ArrayList<String>(); ArrayList<String> tr = new ArrayList<String>();
@@ -28,9 +28,9 @@ public class TPSMeter extends Gui
     	
     	tl.add(TextFormatting.GOLD+""+ TextFormatting.UNDERLINE+"YAWNS Mod"+TextFormatting.RESET+" "+TextFormatting.DARK_GREEN+""+TextFormatting.ITALIC+"(in-dev garbage edition)"+TextFormatting.RESET);
     	tl.add(String.format("%d FPS", Minecraft.getDebugFPS()));
-    	tl.add(String.format("Biome: %s", mc.player.world.getBiomeForCoordsBody(mc.player.getPosition()).getBiomeName()));
+    	tl.add(String.format("Biome: %s", mc.player.world.getBiomeBody(mc.player.getPosition()).getDisplayName().getUnformattedComponentText()));
     	
-    	long time = mc.world.getWorldTime();
+    	long time = mc.world.getGameTime(); // What is getDayTime?
     	bl.add(String.format("%d (%2$tI:%2$tM %2$Tp)", time, LocalTime.MIN.plus(Duration.ofMinutes((long) ((3.0/50.0)*(time + 6000))))));
     	bl.add(String.format("Saturation: %.1f/20.0", mc.player.getFoodStats().getSaturationLevel())); // Todo make this above the hunger bar in a different color
     	int ping = -1;
@@ -44,7 +44,7 @@ public class TPSMeter extends Gui
     	tr.add(TextFormatting.STRIKETHROUGH + "Totally real mod" + TextFormatting.RESET);
     	tr.add(TextFormatting.STRIKETHROUGH + "Also real thing" + TextFormatting.RESET);
     	
-    	if (mc.player.dimension != -1) {
+    	if (mc.player.dimension != DimensionType.NETHER) {
 	    	br.add(String.format("Nether: %,.3f %,.5f %,.3f", mc.player.posX/8, mc.player.posY, mc.player.posZ/8));
 	    	br.add(String.format("Overworld: %,.3f %,.5f %,.3f", mc.player.posX, mc.player.posY, mc.player.posZ));
     	} else {
@@ -71,12 +71,12 @@ public class TPSMeter extends Gui
     			break;
     	}
     	br.add(String.format("Facing: %s (%.2f/%.2f)", axis, MathHelper.wrapDegrees(mc.player.rotationYaw), MathHelper.wrapDegrees(mc.player.rotationPitch)));
-    	Vec3d eyepos = mc.player.getPositionEyes(event.getPartialTicks());
-    	RayTraceResult lookedatblock = mc.world.rayTraceBlocks(eyepos, eyepos.add(mc.player.getLook(event.getPartialTicks()).scale(1024)), true, false, false);
+    	Vec3d eyepos = mc.player.getEyePosition(event.getPartialTicks());
+    	RayTraceResult lookedatblock = mc.world.rayTraceBlocks(eyepos, eyepos.add(mc.player.getLook(event.getPartialTicks()).scale(1024)), RayTraceFluidMode.SOURCE_ONLY, false, false);
     	String lookedatblockstring = "None";
-    	if (lookedatblock != null && lookedatblock.typeOfHit == RayTraceResult.Type.BLOCK)
+    	if (lookedatblock != null && lookedatblock.type == RayTraceResult.Type.BLOCK)
     	{
-    		lookedatblockstring = mc.world.getBlockState(lookedatblock.getBlockPos()).getBlock().getLocalizedName();
+    		lookedatblockstring = mc.world.getBlockState(lookedatblock.getBlockPos()).getBlock().getNameTextComponent().getUnformattedComponentText();
     	}
     	br.add(String.format("Looking at: %s", lookedatblockstring));
     	

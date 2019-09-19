@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity; // Hides fog/blindness effect
 import net.minecraftforge.client.event.RenderBlockOverlayEvent; // Hides fire overlay, water texture overlay
 import net.minecraftforge.client.event.RenderGameOverlayEvent; // Hides helmet overlay, portal swirl overlay, shows my overlay
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class TestOverlay
 {
@@ -59,7 +59,7 @@ public class TestOverlay
 	{
 		switch (event.getType()) {
 		case ALL:
-			new TPSMeter(Minecraft.getMinecraft(), event);
+			new TPSMeter(Minecraft.getInstance(), event);
 			break;
 		case POTION_ICONS:
 			GL11.glPopMatrix();
