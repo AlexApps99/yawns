@@ -14,8 +14,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8 # When setup-java gets updated remember to compile with OpenJDK too, as a matrix test
-    - name: Setup Workspace
-      run: ./gradlew setupCIWorkspace
     - name: Build
       run: ./gradlew build
     - name: Upload artifacts
