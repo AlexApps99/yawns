@@ -65,8 +65,25 @@ minecraft {
     }
 }
 
+repositories {
+    //ImGUI
+    maven {
+        url = "https://jitpack.io"
+    }
+}
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.13.2-25.0.219'
+    
+    // ImGUI
+    ext{
+        imguiVersion = "-SNAPSHOT"
+    }
+    ["gl", "glfw", "core"].each {
+        implementation("com.github.kotlin-graphics.imgui:imgui-$it:$imguiVersion") {
+            exclude group: "org.lwjgl"
+        }
+    }
 }
 
 jar {
