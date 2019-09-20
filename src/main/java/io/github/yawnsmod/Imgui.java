@@ -22,14 +22,14 @@ public class Imgui extends GuiScreen {
 
     static {
         ImguiKt.MINECRAFT_BEHAVIORS = true;
-        GlfwWindow window = GlfwWindow.from(Minecraft.getMinecraft().mainWindow.);
+        GlfwWindow window = GlfwWindow.from(Minecraft.getInstance().mainWindow.getHandle());
         window.makeContextCurrent();
         new Context();
         implGlfw = new ImplGlfw(window, false, null);
         implGl3 = new ImplGL3();
     }
 
-    public void MyMinecraftScreen (ITextComponent title) {
+    public void Imgui (ITextComponent title) {
         super(title);
     }
 
