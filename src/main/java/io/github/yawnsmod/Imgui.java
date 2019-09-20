@@ -1,6 +1,6 @@
 package io.github.yawnsmod;
 
-import glm_.vec2.Vec2;
+//import glm_.vec2.Vec2;
 import imgui.ImGui;
 import imgui.ImguiKt;
 import imgui.imgui.Context;
@@ -8,7 +8,7 @@ import imgui.impl.gl.ImplGL3;
 import imgui.impl.glfw.ImplGlfw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import org.lwjgl.opengl.Display;
+//import org.lwjgl.opengl.Display;
 import net.minecraft.util.text.ITextComponent;
 import uno.glfw.GlfwWindow;
 import net.minecraft.client.MainWindow;
