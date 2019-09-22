@@ -11,33 +11,31 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.lwjgl.glfw.GLFW;
 
+import io.github.yawnsmod.HackManager;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod("yawnsmod")
-public class YawnsMod
-{
-    public static final Logger LOGGER = LogManager.getLogger();
-    public static KeyBinding yawnsgui;
-    
-    public YawnsMod()
-    {
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-    }
+public class YawnsMod {
+	public static final Logger LOGGER = LogManager.getLogger();
+	public static KeyBinding yawnsgui;
+	public static HackManager hm = new HackManager();
+	
+	public YawnsMod() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+	}
 
-    private void commonSetup(FMLCommonSetupEvent event)
-    {
-    	LOGGER.info("Registering Test Overlay...");
-    	MinecraftForge.EVENT_BUS.register(new TestOverlay());
-    	MinecraftForge.EVENT_BUS.register(new ChatModifier());
-    	MinecraftForge.EVENT_BUS.register(new KeyBindHandler());
-    }
+	private void commonSetup(FMLCommonSetupEvent event) {
+		LOGGER.info("Registering Hacks...");
+		for(Hack hack : hm.getEnabledHacks()) {
+			MinecraftForge.EVENT_BUS.register(hack);
+		}
+	}
 
-    private void clientSetup(FMLClientSetupEvent event)
-    {
-    	yawnsgui = new KeyBinding("key.yawnsgui", GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.yawnsmod");
-        ClientRegistry.registerKeyBinding(yawnsgui);
-    }
+	private void clientSetup(FMLClientSetupEvent event) {
+		yawnsgui = new KeyBinding("key.yawnsgui", GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.yawnsmod");
+		ClientRegistry.registerKeyBinding(yawnsgui);
+	}
 }
