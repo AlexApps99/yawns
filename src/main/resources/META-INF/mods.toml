@@ -9,15 +9,16 @@ version="${file.jarVersion}"
 
 credits="Thanks to ForgeHax for being there for me"
 authors="@AlexApps#9295"
+
+#updateJSONURL=""
+displayURL="https://yawnsmod.github.io/"
+logoFile="yawnsmod.png"
+
 description='''
 A free, open source hacked client with a focus on modularity, customization and automation.
 
 Lol
 '''
-
-#updateJSONURL=""
-displayURL="https://yawnsmod.github.io/"
-logoFile="logo.png"
 
 [[dependencies.yawnsmod]]
     modId="forge"
