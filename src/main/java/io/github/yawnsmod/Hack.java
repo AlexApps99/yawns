@@ -4,16 +4,27 @@ import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class Hack {
-	private String name;
-	private String tooltip;
-	private Category category;
-	private int keycode;
+	private String name = "";
+	private String tooltip = "";
+	private Category category = Category.NONE;
+	private boolean status = false;
 	
-	public Hack(String name, String tooltip, Hack.Category category, int keycode) {
+	public Hack(String name, String tooltip, Hack.Category category, boolean status) {
 		this.name = name;
 		this.tooltip = tooltip;
 		this.category = category;
-		this.keycode = keycode;
+		this.status = status;
+	}
+
+	public Hack(String name, String tooltip, boolean status) {
+		this.name = name;
+		this.tooltip = tooltip;
+		this.status = status;
+	}
+
+	public Hack(String name, String tooltip) {
+		this.name = name;
+		this.tooltip = tooltip;
 	}
 	
 	public String getName() {
@@ -27,21 +38,23 @@ public class Hack {
 	public Category getCategory() {
 		return category;
 	}
-	
-	public int getKeycode() {
-		return keycode;
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public boolean toggleStatus() {
+		return status = !status;
 	}
 	
 	public enum Category {
 		CHAT,
 		DISPLAY,
-		MOVEMENT
-	}
-	
-	@SubscribeEvent(receiveCanceled=true)
-	public void onKeyInput(KeyInputEvent event) {
-		if (event.getKey() == keycode && event.getAction() == 1) {
-			YawnsMod.hm.toggle(this);
-		}
+		MOVEMENT,
+		NONE
 	}
 }

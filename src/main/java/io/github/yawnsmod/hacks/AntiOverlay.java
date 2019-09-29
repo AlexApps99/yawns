@@ -1,7 +1,5 @@
 package io.github.yawnsmod.hacks;
 
-import org.lwjgl.glfw.GLFW;
-
 import io.github.yawnsmod.Hack;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity; // Hides fog/blindness effect
 import net.minecraftforge.client.event.RenderBlockOverlayEvent; // Hides fire overlay, water texture overlay
@@ -10,7 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class AntiOverlay extends Hack {
 	public AntiOverlay() {
-		super("Anti-Overlay", "Hides pesky overlays and distractions", Hack.Category.DISPLAY, GLFW.GLFW_KEY_RIGHT_BRACKET);
+		super("Anti-Overlay", "Hides pesky overlays and distractions", Hack.Category.DISPLAY, true);
 	}
 	
 	@SubscribeEvent(receiveCanceled=true)
@@ -23,11 +21,7 @@ public class AntiOverlay extends Hack {
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event) {
 		switch (event.getOverlayType()) {
 		case FIRE:
-			event.setCanceled(true);
-			break;
 		case BLOCK:
-			event.setCanceled(true);
-			break;
 		case WATER:
 			event.setCanceled(true);
 			break;
@@ -40,8 +34,6 @@ public class AntiOverlay extends Hack {
 	public void beforeRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
 		switch (event.getType()) {
 		case HELMET:
-			event.setCanceled(true);
-			break;
 		case PORTAL:
 			event.setCanceled(true);
 			break;

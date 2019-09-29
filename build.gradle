@@ -15,14 +15,11 @@ archivesBaseName = "yawnsmod"
 group = "io.github.yawnsmod"
 version = "0.1"
 
+compileJava.options.encoding = "UTF-8"
+
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
     mappings channel: 'stable', version: '43-1.13'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
@@ -66,7 +63,7 @@ minecraft {
 }
 
 repositories {
-    //ImGUI
+    // ImGUI
     maven {
         url = "https://jitpack.io"
     }
@@ -76,14 +73,11 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.13.2-25.0.219'
     
     // ImGUI
-    ext{
-        imguiVersion = "-SNAPSHOT"
-    }
-    ["gl", "glfw", "core"].each {
-        implementation("com.github.kotlin-graphics.imgui:imgui-$it:$imguiVersion") {
-            exclude group: "org.lwjgl"
-        }
-    }
+    //["imgui-gl", "imgui-glfw", "imgui-core"].each {
+    //    implementation("com.github.kotlin-graphics.imgui:$it:jdk8-SNAPSHOT") {
+    //        exclude group: "org.lwjgl"
+    //    }
+    //}
 }
 
 jar {

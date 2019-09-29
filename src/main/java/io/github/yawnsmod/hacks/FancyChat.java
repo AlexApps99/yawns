@@ -4,11 +4,9 @@ import io.github.yawnsmod.Hack;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import org.lwjgl.glfw.GLFW;
-
 public class FancyChat extends Hack {
 	public FancyChat() {
-		super("Fancy Chat", "Makes the chat ⓕⓐⓝⓒⓨ!", Hack.Category.CHAT, GLFW.GLFW_KEY_EQUAL);
+		super("Fancy Chat", "Makes the chat ⓕⓐⓝⓒⓨ!", Hack.Category.CHAT, false);
 	}
 	
 	@SubscribeEvent(receiveCanceled=true)

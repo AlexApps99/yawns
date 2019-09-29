@@ -2,8 +2,6 @@ package io.github.yawnsmod.hacks;
 
 import java.util.ArrayList;
 
-import org.lwjgl.glfw.GLFW;
-
 import io.github.yawnsmod.Hack;
 import io.github.yawnsmod.YawnsMod;
 
@@ -22,7 +20,7 @@ import net.minecraft.util.math.RayTraceFluidMode;
 
 public class Overlay extends Hack {
 	public Overlay() {
-		super("Overlay", "Overlays information on your screen", Hack.Category.DISPLAY, GLFW.GLFW_KEY_LEFT_BRACKET);
+		super("Overlay", "Overlays information on your screen", Hack.Category.DISPLAY, true);
 	}
 	
 	@SubscribeEvent(receiveCanceled=true)

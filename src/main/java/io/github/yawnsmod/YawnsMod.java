@@ -29,6 +29,7 @@ public class YawnsMod {
 
 	private void commonSetup(FMLCommonSetupEvent event) {
 		LOGGER.info("Registering Hacks...");
+		MinecraftForge.EVENT_BUS.register(hm);
 		for(Hack hack : hm.getEnabledHacks()) {
 			MinecraftForge.EVENT_BUS.register(hack);
 		}
