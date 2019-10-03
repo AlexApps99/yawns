@@ -6,12 +6,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.lwjgl.glfw.GLFW;
-
-import io.github.yawnsmod.HackManager;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,23 +17,18 @@ import org.apache.logging.log4j.Logger;
 public class YawnsMod {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static KeyBinding yawnsgui;
-	public static HackManager hm = new HackManager();
 	
 	public YawnsMod() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+		// Todo mcforge.readthedocs.io/en/latest/concepts/internationalization
+		LOGGER.info("\"A yawn is a silent shout\" - The Prince of Paradox");
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 	}
 
-	private void commonSetup(FMLCommonSetupEvent event) {
-		LOGGER.info("Registering Hacks...");
-		MinecraftForge.EVENT_BUS.register(hm);
-		for(Hack hack : hm.getEnabledHacks()) {
-			MinecraftForge.EVENT_BUS.register(hack);
-		}
-	}
-
 	private void clientSetup(FMLClientSetupEvent event) {
+		LOGGER.info("*starts yawning*");
 		yawnsgui = new KeyBinding("key.yawnsgui", GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.yawnsmod");
 		ClientRegistry.registerKeyBinding(yawnsgui);
+		MinecraftForge.EVENT_BUS.register(HackManager.getInstance());
+		LOGGER.info("*stops yawning*");
 	}
 }

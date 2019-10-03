@@ -9,10 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-public class Installer {
-	public static void main(String[] args) {
-		JEditorPane ep = new JEditorPane("text/html", "This mod needs to be placed in your Forge mods folder.<br>Visit <a href='https://yawnsmod.github.io'>our website</a> for more info.");
-		
+class Installer {
+	public static void main(final String[] args) {
+		final JEditorPane ep = new JEditorPane("text/html", "This mod needs to be placed in your Forge mods folder.<br>Visit <a href='https://yawnsmod.github.io'>our website</a> for more info.");
+
 		ep.addHyperlinkListener(new HyperlinkListener() {
 			@Override
 			public void hyperlinkUpdate(HyperlinkEvent e) {

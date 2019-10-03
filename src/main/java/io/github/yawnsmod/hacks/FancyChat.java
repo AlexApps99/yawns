@@ -9,7 +9,7 @@ public class FancyChat extends Hack {
 		super("Fancy Chat", "Makes the chat ⓕⓐⓝⓒⓨ!", Hack.Category.CHAT, false);
 	}
 	
-	@SubscribeEvent(receiveCanceled=true)
+	@SubscribeEvent
 	public void onClientChat(ClientChatEvent event) {
 		if (event.getMessage().charAt(0) != '/') {
 			event.setMessage(">" + event.getMessage().replace('0', 'ⓞ').replace('1', '➀')

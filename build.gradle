@@ -73,11 +73,11 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.13.2-25.0.219'
     
     // ImGUI
-    //["imgui-gl", "imgui-glfw", "imgui-core"].each {
-    //    implementation("com.github.kotlin-graphics.imgui:$it:jdk8-SNAPSHOT") {
-    //        exclude group: "org.lwjgl"
-    //    }
-    //}
+    ["imgui-core", "imgui-gl", "imgui-glfw"].each {
+        implementation("com.github.kotlin-graphics.imgui:$it:jdk8-SNAPSHOT") {
+            exclude group: "org.lwjgl"
+        }
+    }
 }
 
 jar {

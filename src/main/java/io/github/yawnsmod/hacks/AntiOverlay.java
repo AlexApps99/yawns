@@ -11,34 +11,40 @@ public class AntiOverlay extends Hack {
 		super("Anti-Overlay", "Hides pesky overlays and distractions", Hack.Category.DISPLAY, true);
 	}
 	
-	@SubscribeEvent(receiveCanceled=true)
-	public void onFogDensity(FogDensity event) { // This may cause rendering bugs, possibly try RenderFogEvent
-		event.setDensity(event.getDensity()*0);
+	@SubscribeEvent
+	public void onFogDensity(FogDensity event) {
+		event.setDensity(event.getDensity() * 0); // For if it should be disabled incrementally
+		// Cancels fog rendering
 		event.setCanceled(true);
 	}
 	
-	@SubscribeEvent(receiveCanceled=true)
+	@SubscribeEvent
 	public void onRenderBlockOverlay(RenderBlockOverlayEvent event) {
 		switch (event.getOverlayType()) {
-		case FIRE:
-		case BLOCK:
-		case WATER:
-			event.setCanceled(true);
-			break;
-		default:
-			break;
+			case FIRE:
+			case BLOCK:
+			case WATER:
+				// Cancels rendering of fire overlay, stuck in block overlay, underwater overlay
+				event.setCanceled(true);
+				break;
 		}
 	}
 	
-	@SubscribeEvent(receiveCanceled=true)
+	@SubscribeEvent
 	public void beforeRenderGameOverlay(RenderGameOverlayEvent.Pre event) {
 		switch (event.getType()) {
-		case HELMET:
-		case PORTAL:
-			event.setCanceled(true);
-			break;
-		default:
-			break;
+			//case BOSSHEALTH:
+			case HELMET:
+			case PORTAL:
+				// Cancels helmet rendering (eg pumpkin) and portal swirl rendering (not to be confused with nausea)
+				event.setCanceled(true);
+				break;
 		}
+	}
+
+	@SubscribeEvent
+	public void beforeRenderGameOverlayText(RenderGameOverlayEvent.Pre.Text event) {
+		// Hides text onscreen (needs further testing, optional option
+		//event.setCanceled(true);
 	}
 }

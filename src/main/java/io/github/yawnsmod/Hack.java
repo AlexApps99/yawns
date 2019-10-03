@@ -1,30 +1,28 @@
 package io.github.yawnsmod;
 
-import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
 
 public class Hack {
 	private String name = "";
 	private String tooltip = "";
 	private Category category = Category.NONE;
 	private boolean status = false;
+	protected final Minecraft mc = Minecraft.getInstance();
 	
 	public Hack(String name, String tooltip, Hack.Category category, boolean status) {
 		this.name = name;
 		this.tooltip = tooltip;
 		this.category = category;
-		this.status = status;
+		setStatus(status);
 	}
 
 	public Hack(String name, String tooltip, boolean status) {
-		this.name = name;
-		this.tooltip = tooltip;
-		this.status = status;
+		this(name, tooltip, Category.NONE, status);
 	}
 
 	public Hack(String name, String tooltip) {
-		this.name = name;
-		this.tooltip = tooltip;
+		this(name, tooltip, false);
 	}
 	
 	public String getName() {
@@ -43,13 +41,27 @@ public class Hack {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public boolean setStatus(boolean status) {
+		if (this.status != status) {
+			if (this.status = status) {
+				this.onEnabled();
+				MinecraftForge.EVENT_BUS.register(this);
+			} else {
+				MinecraftForge.EVENT_BUS.unregister(this);
+				this.onDisabled();
+			}
+		}
+
+		return status;
 	}
 
 	public boolean toggleStatus() {
-		return status = !status;
+		return setStatus(!this.status);
 	}
+
+	public void onEnabled() {}
+
+	public void onDisabled() {}
 	
 	public enum Category {
 		CHAT,

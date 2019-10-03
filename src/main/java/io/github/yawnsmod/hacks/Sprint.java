@@ -9,7 +9,7 @@ public class Sprint extends Hack {
 		super("Sprint", "Gotta go fast", Hack.Category.MOVEMENT, false);
 	}
 
-	@SubscribeEvent(receiveCanceled=true)
+	@SubscribeEvent
 	public void onInputUpdate(InputUpdateEvent event) {
 		if (event.getMovementInput().moveForward > 0) {
 			event.getEntityPlayer().setSprinting(true);
