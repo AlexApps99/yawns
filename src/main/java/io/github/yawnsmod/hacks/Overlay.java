@@ -34,26 +34,25 @@ public class Overlay extends Hack {
     	  - Add potion effects, duration, level (overlayed over icons or as text without icons onscreen)
     	  - Move mod list down as to not overlap the potion icons (only when they're visible)
     	\*                                                                                              */
-
-    	final int width = mc.mainWindow.getScaledWidth();
-    	final int height = mc.mainWindow.getScaledHeight();
-
-        // Top-left text
-        final List<String> tl = new ArrayList<>();
-        // Top-right text
-        final List<String> tr = new ArrayList<>();
-        // Bottom-left text
-        final List<String> bl = new ArrayList<>();
-        // Bottom-right text
-        final List<String> br = new ArrayList<>();
-
-        long time = mc.world.getDayTime();
-        int ping = -1;
-        String axis = "??";
-        Vec3d eyepos = mc.player.getEyePosition(event.getPartialTicks());
-        RayTraceResult lookedatblock = mc.world.rayTraceBlocks(eyepos, eyepos.add(mc.player.getLook(event.getPartialTicks()).scale(1024)), RayTraceFluidMode.SOURCE_ONLY);
-
 		if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+			final int width = mc.mainWindow.getScaledWidth();
+			final int height = mc.mainWindow.getScaledHeight();
+
+			// Top-left text
+			final List<String> tl = new ArrayList<>();
+			// Top-right text
+			final List<String> tr = new ArrayList<>();
+			// Bottom-left text
+			final List<String> bl = new ArrayList<>();
+			// Bottom-right text
+			final List<String> br = new ArrayList<>();
+
+			long time = mc.world.getDayTime();
+			int ping = -1;
+			String axis = "??";
+			Vec3d eyepos = mc.player.getEyePosition(event.getPartialTicks());
+			RayTraceResult lookedatblock = mc.world.rayTraceBlocks(eyepos, eyepos.add(mc.player.getLook(event.getPartialTicks()).scale(1024)), RayTraceFluidMode.SOURCE_ONLY);
+
 	    	tl.add(TextFormatting.GOLD+""+ TextFormatting.UNDERLINE+"YAWNS Mod"+TextFormatting.RESET+" "+TextFormatting.DARK_GREEN+""+TextFormatting.ITALIC+"(in-dev garbage edition)"+TextFormatting.RESET);
 	    	tl.add(String.format("%d FPS", Minecraft.getDebugFPS()));
 	    	tl.add(String.format("Biome: %s", mc.player.world.getBiomeBody(mc.player.getPosition()).getDisplayName().getUnformattedComponentText()));

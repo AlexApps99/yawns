@@ -13,9 +13,10 @@ public class AntiOverlay extends Hack {
 	
 	@SubscribeEvent
 	public void onFogDensity(FogDensity event) {
+		// Todo fix buggy behaviour like tracers being hidden, different effect activating underwater to out of water
 		event.setDensity(event.getDensity() * 0); // For if it should be disabled incrementally
 		// Cancels fog rendering
-		//event.setCanceled(true);
+		event.setCanceled(true);
 	}
 	
 	@SubscribeEvent

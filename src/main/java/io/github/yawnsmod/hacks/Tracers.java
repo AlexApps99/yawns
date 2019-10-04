@@ -1,11 +1,10 @@
 package io.github.yawnsmod.hacks;
 
 import io.github.yawnsmod.Hack;
-import static io.github.yawnsmod.YawnsMod.LOGGER;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 
@@ -16,10 +15,8 @@ public class Tracers extends Hack {
 
     // https://www.minecraftforge.net/forum/topic/33464-18solved-drawing-a-simple-line/?do=findComment&comment=177754
     @SubscribeEvent
-    public void onEntityViewRender(EntityViewRenderEvent event) {
-        //Vec3d pos = event.getEntity().getEyePosition((float) event.getRenderPartialTicks());
-        Vec3d pos = event.getEntity().getPositionVector();
-
+    public void afterRenderWorld(RenderWorldLastEvent event) {
+        // todo use GlStateManager
         // Saves previous state of OpenGL
         // khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushMatrix.xml
         // khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushAttrib.xml
@@ -40,10 +37,10 @@ public class Tracers extends Hack {
         GL11.glLineWidth(2f);
 
         GL11.glBegin(GL11.GL_LINES); // khronos.org/opengl/wiki/Primitive#Line_primitives
-        //for (Entity entity: mc.world.getEntities(EntityOtherPlayerMP.class, (e) -> true)) {
         for (Entity entity: mc.world.getEntities(Entity.class, (e) -> e.hasCustomName() || e instanceof EntityOtherPlayerMP)) {
-            GL11.glVertex3d(0, 0, 0);
-            GL11.glVertex3d(entity.posX - pos.x, entity.posY - pos.y, entity.posZ - pos.z);
+            // todo get this working
+            GL11.glVertex3d(mc.player.posX, mc.player.posY, mc.player.posZ);
+            GL11.glVertex3d(entity.posX, entity.posY, entity.posZ);
         }
         GL11.glEnd();
 

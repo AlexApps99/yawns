@@ -20,15 +20,15 @@ public class YawnsMod {
 	
 	public YawnsMod() {
 		// Todo mcforge.readthedocs.io/en/latest/concepts/internationalization
+		// todo make it say "with gadget" instead of "java edition"
+		// todo make it say minecrap instead of minecraft
 		LOGGER.info("\"A yawn is a silent shout\" - The Prince of Paradox");
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		LOGGER.info("*starts yawning*");
 		yawnsgui = new KeyBinding("key.yawnsgui", GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.yawnsmod");
 		ClientRegistry.registerKeyBinding(yawnsgui);
 		MinecraftForge.EVENT_BUS.register(HackManager.getInstance());
-		LOGGER.info("*stops yawning*");
 	}
 }

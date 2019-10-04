@@ -2,6 +2,7 @@ package io.github.yawnsmod;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Logger;
 
 public class Hack {
 	private String name = "";
@@ -9,7 +10,8 @@ public class Hack {
 	private Category category = Category.NONE;
 	private boolean status = false;
 	protected final Minecraft mc = Minecraft.getInstance();
-	
+	protected final Logger LOGGER = YawnsMod.LOGGER;
+
 	public Hack(String name, String tooltip, Hack.Category category, boolean status) {
 		this.name = name;
 		this.tooltip = tooltip;
