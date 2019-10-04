@@ -15,7 +15,7 @@ public class AntiOverlay extends Hack {
 	public void onFogDensity(FogDensity event) {
 		event.setDensity(event.getDensity() * 0); // For if it should be disabled incrementally
 		// Cancels fog rendering
-		event.setCanceled(true);
+		//event.setCanceled(true);
 	}
 	
 	@SubscribeEvent
