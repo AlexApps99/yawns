@@ -3,10 +3,12 @@ package io.github.yawnsmod.hacks;
 import io.github.yawnsmod.Hack;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 public class Tracers extends Hack {
     public Tracers() {
@@ -16,7 +18,7 @@ public class Tracers extends Hack {
     // https://www.minecraftforge.net/forum/topic/33464-18solved-drawing-a-simple-line/?do=findComment&comment=177754
     @SubscribeEvent
     public void afterRenderWorld(RenderWorldLastEvent event) {
-        // todo use GlStateManager
+        // todo fix render order, enable transparency
         // Saves previous state of OpenGL
         // khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushMatrix.xml
         // khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushAttrib.xml
@@ -37,10 +39,9 @@ public class Tracers extends Hack {
         GL11.glLineWidth(2f);
 
         GL11.glBegin(GL11.GL_LINES); // khronos.org/opengl/wiki/Primitive#Line_primitives
-        for (Entity entity: mc.world.getEntities(Entity.class, (e) -> e.hasCustomName() || e instanceof EntityOtherPlayerMP)) {
-            // todo get this working
-            GL11.glVertex3d(mc.player.posX, mc.player.posY, mc.player.posZ);
-            GL11.glVertex3d(entity.posX, entity.posY, entity.posZ);
+        for (Entity entity: mc.world.getEntities(Entity.class, (e) -> e instanceof EntityOtherPlayerMP || e.isCreatureType(EnumCreatureType.MONSTER, false) || !(e.isNonBoss()))) {
+            GL11.glVertex3d(0, 0, 0);
+            GL11.glVertex3d(entity.posX - mc.player.posX, entity.posY - mc.player.posY, entity.posZ - mc.player.posZ);
         }
         GL11.glEnd();
 
