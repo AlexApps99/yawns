@@ -1,4 +1,3 @@
-// By AlexApps
 package io.github.yawnsmod;
 
 import net.minecraft.client.settings.KeyBinding;
@@ -20,8 +19,6 @@ public class YawnsMod {
 	
 	public YawnsMod() {
 		// Todo mcforge.readthedocs.io/en/latest/concepts/internationalization
-		// todo make it say "with gadget" instead of "java edition"
-		// todo make it say minecrap instead of minecraft
 		LOGGER.info("\"A yawn is a silent shout\" - The Prince of Paradox");
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 	}

@@ -10,11 +10,15 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import org.lwjgl.glfw.GLFW;
 
+// todo add basic clientside commands with brigadier
+// try to run ondisabled when game is closed
 public class HackManager {
 	private final Map<Hack, Integer> hacks = new HashMap<>();
 	private final static HackManager hm = new HackManager();
 	
 	private HackManager() {
+		hacks.put(new AdvancedTooltip(), GLFW.GLFW_KEY_APOSTROPHE);
+		hacks.put(new AntiClutter(), GLFW.GLFW_KEY_BACKSLASH);
 		hacks.put(new AntiOverlay(), GLFW.GLFW_KEY_RIGHT_BRACKET);
 		hacks.put(new FancyChat(), GLFW.GLFW_KEY_MINUS);
 		hacks.put(new FullBright(), GLFW.GLFW_KEY_UP);

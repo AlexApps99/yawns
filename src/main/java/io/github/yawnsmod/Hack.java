@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Logger;
 
+// todo This should be implementable, not extendable...
+// http://tutorials.jenkov.com/java/interfaces.html#interface-default-methods
 public class Hack {
 	private String name = "";
 	private String tooltip = "";

@@ -1,7 +1,6 @@
 package io.github.yawnsmod.hacks;
 
 import io.github.yawnsmod.Hack;
-import net.minecraft.client.Minecraft;
 
 public class FullBright extends Hack {
     private double gammaSetting = 1;
@@ -12,12 +11,14 @@ public class FullBright extends Hack {
 
     @Override
     public void onEnabled() {
-        gammaSetting = Minecraft.getInstance().gameSettings.gammaSetting;
-        Minecraft.getInstance().gameSettings.gammaSetting = 15;
+        gammaSetting = mc.gameSettings.gammaSetting;
+        mc.gameSettings.gammaSetting = 15;
     }
 
     @Override
     public void onDisabled() {
-        Minecraft.getInstance().gameSettings.gammaSetting = gammaSetting;
+        if (mc.gameSettings.gammaSetting == 15) {
+            mc.gameSettings.gammaSetting = gammaSetting;
+        }
     }
 }

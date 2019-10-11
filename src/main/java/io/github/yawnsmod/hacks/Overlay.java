@@ -33,8 +33,10 @@ public class Overlay extends Hack {
     	  - Add held item enchantments + durability (possibly using icons, possibly using text)
     	  - Add potion effects, duration, level (overlayed over icons or as text without icons onscreen)
     	  - Move mod list down as to not overlap the potion icons (only when they're visible)
+    	  - Put all things into en_us.json to be localized
+    	  - Handle as textcomponents instead of strings
     	\*                                                                                              */
-		if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+		if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) { // How often does this get called per frame?
 			final int width = mc.mainWindow.getScaledWidth();
 			final int height = mc.mainWindow.getScaledHeight();
 
@@ -61,6 +63,7 @@ public class Overlay extends Hack {
 				ping = mc.player.connection.getPlayerInfo(mc.player.getGameProfile().getId()).getResponseTime();
 			} catch (NullPointerException err) {}
 			bl.add(String.format("Ping: %d", ping));
+			bl.add(String.format("Health: %.1f/%.1f", mc.player.getHealth(), mc.player.getMaxHealth()));
 			bl.add(String.format("Saturation: %.1f/20.0", mc.player.getFoodStats().getSaturationLevel()));
 	    	bl.add(String.format("%d (%2$tI:%2$tM %2$Tp)", time, LocalTime.MIN.plus(Duration.ofMinutes((long) ((3.0/50.0)*(time + 6000))))));
 	    	
