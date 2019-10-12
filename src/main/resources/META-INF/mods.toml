@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[25,)" # (24 is current forge version)
+loaderVersion="[25,)" # (25 is current forge version)
 issueTrackerURL="https://github.com/AlexApps99/yawns/issues"
 
 [[mods]]
@@ -7,7 +7,7 @@ modId="yawnsmod"
 displayName="YAWNS Mod"
 version="${file.jarVersion}"
 
-credits="Thanks to ForgeHax for being there for me"
+credits="Thanks to ForgeHax and Wurst for being there for me"
 authors="@AlexApps#9295"
 
 #updateJSONURL=""

@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-    	maven { url = "https://files.minecraftforge.net/maven" }
+    	maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
     }
@@ -10,23 +10,20 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
-archivesBaseName = "yawnsmod"
-group = "io.github.yawnsmod"
-version = "0.1"
+archivesBaseName = 'yawnsmod'
+group = 'io.github.yawnsmod'
+version = "0.2"
 
-compileJava.options.encoding = "UTF-8"
+compileJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'stable', version: '43-1.13'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    
-    // accessTransformer = file('build/resources/main/META-INF/accesstransformer.cfg')
+    mappings channel: 'snapshot', version: '20190530-1.13.2'
+    //accessTransformer = file('build/resources/main/META-INF/accesstransformer.cfg')
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
@@ -63,34 +60,42 @@ minecraft {
 }
 
 repositories {
-    // ImGUI
-    maven {
-        url = "https://jitpack.io"
-    }
+    mavenCentral()
+    jcenter()
+}
+
+// https://github.com/MinecraftForge/ForgeGradle/wiki/Dependencies#packaging-dependencies-with-mod-file
+// consider using https://github.com/johnrengelman/shadow instead, as it offers more features
+configurations {
+    embedImplementation
+    implementation.extendsFrom embedImplementation
+
+    embedRuntime
+    runtimeOnly.extendsFrom embedRuntimeOnly
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.13.2-25.0.219'
-    
-    // ImGUI
-    ["imgui-core", "imgui-gl", "imgui-glfw"].each {
-        implementation("com.github.kotlin-graphics.imgui:$it:jdk8-SNAPSHOT") {
-            exclude group: "org.lwjgl"
-        }
+
+    embedImplementation 'org.lwjgl:lwjgl-nuklear:3.1.6'
+    ['windows', 'linux', 'macos'].each {
+        embedRuntimeOnly "org.lwjgl:lwjgl-nuklear:3.1.6:natives-${it}"
     }
 }
 
 jar {
     manifest {
         attributes([
-            "Specification-Title": project.archivesBaseName,
-            "Specification-Vendor": "AlexApps99",
-            "Specification-Version": "1",
-            "Implementation-Title": project.archivesBaseName,
-            "Implementation-Vendor" :"AlexApps99",
-            "Implementation-Version": project.version,
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "Main-Class": "io.github.yawnsmod.Installer"
+            'Specification-Title': project.archivesBaseName,
+            'Specification-Vendor': 'AlexApps99',
+            'Specification-Version': project.version,
+            'Implementation-Title': project.archivesBaseName,
+            'Implementation-Vendor': 'AlexApps99',
+            'Implementation-Version': project.version,
+            'Implementation-Timestamp': new Date().format('yyyy-MM-dd\'T\'HH:mm:ssZ'),
+            'Main-Class': project.group+'.Installer'
         ])
     }
+    from configurations.embedImplementation.collect { it.isDirectory() ? it : zipTree(it) }
+    from configurations.embedRuntimeOnly.collect { it.isDirectory() ? it : zipTree(it) }
 }
