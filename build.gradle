@@ -65,7 +65,8 @@ repositories {
 }
 
 // https://github.com/MinecraftForge/ForgeGradle/wiki/Dependencies#packaging-dependencies-with-mod-file
-// consider using https://github.com/johnrengelman/shadow instead, as it offers more features
+// consider using https://mcforge.readthedocs.io/en/1.13.x/gettingstarted/dependencymanagement/#dependency-extraction
+// or https://github.com/johnrengelman/shadow instead, as it offers more features
 configurations {
     embedImplementation
     implementation.extendsFrom embedImplementation

@@ -11,6 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
 
 // todo add basic clientside commands with brigadier
+// use https://github.com/TheElectronWill/night-config for config as it's already a forge dep
 // try to run ondisabled when game is closed
 public class HackManager {
 	private final Map<Hack, Integer> hacks = new HashMap<>();
