@@ -4,8 +4,9 @@ on:
     paths:
       - '**'
       - '!.github/**'
-      - '!README.md'
-      - '!.gitignore'
+      - '.github/workflows/**'
+      - '!**.md'
+      - '!**/.gitignore'
 
 jobs:
   build:
@@ -38,8 +39,8 @@ jobs:
     - name: Upload artifacts to Discord
       continue-on-error: true
       run: >-
-        curl
-        -F 'payload_json={embeds:[{title:"${{github.repository}}@`${{github.sha}}`",url:"https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/"}]}'
-        -F "file=@$(build/libs/yawnsmod-?.?.jar)"
-        -F 'content=@Developer'
+        curl -sS
+        --form-string 'payload_json={embeds:[{title:"${{github.repository}}@`${{github.sha}}`",url:"https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/"}]}'
+        --form "file=@$(build/libs/yawnsmod-?.?.jar)"
+        --form-string 'content=@Developer'
         ${{secrets.BUILDS_WEBHOOK}}
