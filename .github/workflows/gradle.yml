@@ -37,9 +37,9 @@ jobs:
     
     - name: Upload artifacts to Discord
       continue-on-error: true
-      run: |
-        curl \
-        -F 'payload_json={embeds:[{title:"${{github.repository}}@`${{github.sha}}`",url:"https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/"}]}' \
-        -F "file=@$(build/libs/yawnsmod-?.?.jar)" \
+      run: >-
+        curl
+        -F 'payload_json={embeds:[{title:"${{github.repository}}@`${{github.sha}}`",url:"https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/"}]}'
+        -F "file=@$(build/libs/yawnsmod-?.?.jar)"
         -F 'content=@Developer'
         ${{secrets.BUILDS_WEBHOOK}}
