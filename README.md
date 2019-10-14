@@ -11,3 +11,6 @@
 | **W**  | Wildly     |
 | **N**  | Nauseating |
 | **S**  | Scam       |
+
+## But can it FlexTape™?
+Yes.
