@@ -41,6 +41,6 @@ jobs:
       run: >-
         JARFILE=(build/libs/yawnsmod-?.?.jar);
         curl -sS
-        --form-string $'content=<@&621530477861535744>\n[**${{github.repository}}@${{github.sha}}**](https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/)\n```\n'"$(git log -n 1 --pretty=format:%B ${{github.sha}})```"
+        --form-string $'content=<@&621530477861535744>\n[**${{github.repository}}@${{github.sha}}**](https://github.com/${{github.repository}}/commit/${{github.sha}}/checks/)\n```\n'"$(git log -n 1 --pretty=format:%B ${{github.sha}})"'```'
         --form "file=@$JARFILE"
         ${{secrets.BUILDS_WEBHOOK}}
