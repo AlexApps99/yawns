@@ -5,7 +5,7 @@ on:
       - '**'
       - '!.github/**'
       - '!README.md'
-      - '!.gitignore
+      - '!.gitignore'
 
 jobs:
   build:
