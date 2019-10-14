@@ -23,9 +23,10 @@ jobs:
         path: build/libs/
     - name: Post file to Discord
       run: |
+        JARFILE=( build/libs/yawnsmod-?.?.jar )
         curl -X POST \
         -H 'Content-Type: multipart/form-data'  \
         -F 'payload_json={embeds:[{title:"YAWNS Mod Build",description:"A new build of YAWNS Mod is available to test!",url:"https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks/"}]}' \
-        -F "file=@$((build/libs/yawnsmod-?.?.jar)[0])" \
+        -F "file=@$JARFILE" \
         -F 'content=[${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}/)'
         ${{ secrets.BUILDS_WEBHOOK }}
