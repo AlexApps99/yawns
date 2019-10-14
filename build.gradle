@@ -8,9 +8,14 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
+
+plugins {
+    id 'net.minecraftforge.gradle'
+    id 'eclipse'
+    id 'idea'
+    id 'checkstyle'
+    id 'com.github.spotbugs'
+}
 
 archivesBaseName = 'yawnsmod'
 group = 'io.github.yawnsmod'
