@@ -78,10 +78,10 @@ configurations {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.13.2-25.0.219'
 
-    embedImplementation 'org.lwjgl:lwjgl-nuklear:3.1.6'
-    ['windows', 'linux', 'macos'].each {
-        embedRuntimeOnly "org.lwjgl:lwjgl-nuklear:3.1.6:natives-${it}"
-    }
+    //embedImplementation 'org.lwjgl:lwjgl-nuklear:3.1.6'
+    //['windows', 'linux', 'macos'].each {
+    //    embedRuntimeOnly "org.lwjgl:lwjgl-nuklear:3.1.6:natives-${it}"
+    //}
 }
 
 jar {
