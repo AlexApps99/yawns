@@ -16,7 +16,7 @@ public class Tracers extends Hack {
 
     private <T extends Entity> void drawEntityLine(T e, float width, float r, float g, float b, float a) {
         // todo fix line width not always being correct
-        GL11.glLineWidth(width);
+        //GL11.glLineWidth(width);
         GL11.glColor4f(r, g, b, a);
         GL11.glVertex3d(0, 0, 0);
         GL11.glVertex3d(e.posX - mc.player.posX, e.posY - mc.player.posY, e.posZ - mc.player.posZ);

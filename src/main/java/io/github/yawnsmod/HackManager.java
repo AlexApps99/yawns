@@ -19,7 +19,6 @@ public class HackManager {
 	
 	private HackManager() {
 		hacks.put(new AdvancedTooltip(), GLFW.GLFW_KEY_APOSTROPHE);
-		hacks.put(new AntiClutter(), GLFW.GLFW_KEY_BACKSLASH);
 		hacks.put(new AntiOverlay(), GLFW.GLFW_KEY_RIGHT_BRACKET);
 		hacks.put(new FancyChat(), GLFW.GLFW_KEY_MINUS);
 		hacks.put(new FullBright(), GLFW.GLFW_KEY_UP);
