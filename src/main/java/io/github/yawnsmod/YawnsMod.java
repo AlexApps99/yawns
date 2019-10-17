@@ -24,7 +24,7 @@ public class YawnsMod {
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		yawnsgui = new KeyBinding("key.yawnsgui", GLFW.GLFW_KEY_RIGHT_SHIFT, "key.categories.yawnsmod");
+		yawnsgui = new KeyBinding("key.yawnsmod.clickgui", GLFW.GLFW_KEY_RIGHT_SHIFT, "key.yawnsmod.categories.yawnsmod");
 		ClientRegistry.registerKeyBinding(yawnsgui);
 		MinecraftForge.EVENT_BUS.register(HackManager.getInstance());
 	}

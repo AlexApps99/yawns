@@ -13,6 +13,7 @@ import org.lwjgl.glfw.GLFW;
 // todo add basic clientside commands with brigadier
 // use https://github.com/TheElectronWill/night-config for config as it's already a forge dep
 // try to run ondisabled when game is closed
+// localize more stuff
 public class HackManager {
 	private final Map<Hack, Integer> hacks = new HashMap<>();
 	private final static HackManager hm = new HackManager();
@@ -25,6 +26,7 @@ public class HackManager {
 		hacks.put(new Overlay(), GLFW.GLFW_KEY_LEFT_BRACKET);
 		hacks.put(new Sprint(), GLFW.GLFW_KEY_EQUAL);
 		hacks.put(new Tracers(), GLFW.GLFW_KEY_DOWN);
+		hacks.put(new Trajectory(), GLFW.GLFW_KEY_BACKSLASH);
 	}
 	
 	public static HackManager getInstance() {

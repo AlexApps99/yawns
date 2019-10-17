@@ -15,14 +15,18 @@ public class Tracers extends Hack {
     }
 
     private <T extends Entity> void drawEntityLine(T e, float width, float r, float g, float b, float a) {
-        // todo fix line width not always being correct
+        // todo fix line width causing GL errors
         //GL11.glLineWidth(width);
         GL11.glColor4f(r, g, b, a);
         GL11.glVertex3d(0, 0, 0);
-        GL11.glVertex3d(e.posX - mc.player.posX, e.posY - mc.player.posY, e.posZ - mc.player.posZ);
+        GL11.glVertex3d(e.posX - mc.getRenderManager().viewerPosX, e.posY - mc.getRenderManager().viewerPosY, e.posZ - mc.getRenderManager().viewerPosZ);
     }
 
-    private float distanceFadeClamp(float currentDistance, float startValue, float endValue, float endDistance) {
+    private float transparencyFade(float currentDistance) {
+        final float startValue = 0.75f;
+        final float endValue = 0.25f;
+        final float endDistance = 32;
+
         float distance = -(endValue/endDistance) * currentDistance + startValue;
         if (distance < endValue) {
             distance = endValue;
@@ -34,13 +38,10 @@ public class Tracers extends Hack {
     @SubscribeEvent
     public void afterRenderWorld(RenderWorldLastEvent event) {
         // Saves previous state of OpenGL
-        // khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushMatrix.xml
         // khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glPushAttrib.xml
-        GL11.glPushMatrix();
         GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
 
         // Configures attributes
-        GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_DEPTH_TEST); // Makes tracer draw on top of everything
         // Line appearance settings
@@ -51,17 +52,15 @@ public class Tracers extends Hack {
 
         GL11.glBegin(GL11.GL_LINES); // khronos.org/opengl/wiki/Primitive#Line_primitives
         for (Entity e: mc.world.getEntities(EntityLiving.class, (e) -> e.isCreatureType(EnumCreatureType.MONSTER, false) || e.hasCustomName())) {
-            drawEntityLine(e, 3, (float) e.posX % 2, (float) e.posX % 2, (float) e.posX % 2, distanceFadeClamp(e.getDistance(mc.player), 1, 0.25f, 32));
+            drawEntityLine(e, 3, 1, 0, 0, transparencyFade(e.getDistance(mc.player)));
         }
-
         for (Entity e: mc.world.getEntities(EntityOtherPlayerMP.class, (e) -> true)) {
             // It works, but I should probably hide fake players e.g. game selectors in hypixel lobby
-            drawEntityLine(e, 3, (float) e.posX % 2, (float) e.posX % 2, (float) e.posX % 2, distanceFadeClamp(e.getDistance(mc.player), 1, 0.25f, 32));
+            drawEntityLine(e, 3, 0, 1, 0, transparencyFade(e.getDistance(mc.player)));
         }
         GL11.glEnd();
 
         // Restores previous state of OpenGL
-        GL11.glPopMatrix();
         GL11.glPopAttrib();
     }
 }

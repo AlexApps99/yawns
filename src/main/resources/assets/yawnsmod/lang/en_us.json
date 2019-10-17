@@ -1,4 +1,20 @@
 {
-  "key.categories.yawnsmod": "YAWNS Mod",
-  "key.yawnsgui": "Open YAWNS Mod GUI"
+  "yawnsmod.title": "YAWNS Mod",
+  "key.yawnsmod.categories.yawnsmod": "YAWNS Mod",
+  "key.yawnsmod.clickgui": "Open YAWNS Mod GUI",
+  "yawnsmod.hacks.overlay.title": "%s%sYAWNS Mod%s %s%s(in-dev garbage edition)",
+  "yawnsmod.hacks.overlay.fps": "%d FPS",
+  "yawnsmod.hacks.overlay.biome": "Biome: %s",
+  "yawnsmod.hacks.overlay.ping": "Ping: %d",
+  "yawnsmod.hacks.overlay.health": "Health: %.1f/%.1f",
+  "yawnsmod.hacks.overlay.saturation": "Saturation: %.1f/20.0",
+  "yawnsmod.hacks.overlay.time": "%d (%2$tI:%2$tM %2$Tp)",
+  "yawnsmod.hacks.overlay.block": "Looking at: %s",
+  "yawnsmod.hacks.overlay.north": "North -Z",
+  "yawnsmod.hacks.overlay.east": "East +X",
+  "yawnsmod.hacks.overlay.south": "South +Z",
+  "yawnsmod.hacks.overlay.west": "West -X",
+  "yawnsmod.hacks.overlay.facing": "Facing %s (%.2f/%.2f)",
+  "yawnsmod.hacks.overlay.nether": "Nether: %,.3f %,.5f %,.3f",
+  "yawnsmod.hacks.overlay.overworld": "Overworld: %,.3f %,.5f %,.3f"
 }
